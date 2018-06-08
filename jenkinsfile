@@ -1,14 +1,14 @@
 node {
    stage('Build') {
-      // Run the Taurus build
+      // Build
    }
    stage('Performance Tests') {
     // Get code from Github repository
     sh 'git clone git@github.com:cgodinez1271/taurus.git'
     parallel(
         BlazeMeterTest: {
-            dir ('Taurus-Repo') {
-                sh 'bzt <file_name>.yml -report'
+            dir ('taurus') {
+                sh 'bzt test.yml -report'
             }
         },
         Analysis: {
@@ -16,5 +16,6 @@ node {
         })
    }
    stage(‘Deploy’) {
+     // Deploy
    }
 }
